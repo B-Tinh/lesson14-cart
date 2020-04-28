@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import Products from '../components/Products';
 
-class ProductsContainer extends Component {
+class CartContainer extends Component {
     render() {
-        const { products } = this.props;
+        const { cart } = this.props;
+        console.log(cart);
         return (
-           <Products products={products}/> 
+            <div></div>
         );
     }
 }
 
-ProductsContainer.propTypes = {
-    products : PropTypes.arrayOf(
-        PropTypes.shape({
+CartContainer.propTypes = {
+    cart : PropTypes.arrayOf(PropTypes.shape({
+        product: PropTypes.shape({
             id: PropTypes.number.isRequired,
             name: PropTypes.string.isRequired,
             image: PropTypes.string.isRequired,
@@ -22,14 +22,15 @@ ProductsContainer.propTypes = {
             price: PropTypes.number.isRequired,
             inventory: PropTypes.number.isRequired,
             rate: PropTypes.number.isRequired
-        })
+        }).isRequired,
+        quantity: PropTypes.number.isRequired,
+    })      
     ).isRequired
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
     return {
-        products: state.products,
+        cart: state.cart,
     }
 }
-
-export default connect(mapStateToProps, null)(ProductsContainer);
+export default connect(mapStateToProps, null)(CartContainer);
